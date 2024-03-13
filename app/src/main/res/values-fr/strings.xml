@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FFVL Tracker</string>
+    <string name="enter_ffvl_tracker_key">Entrer votre clé de tracking FFVL</string>
+    <string name="start_tracking">Démarrer le tracking</string>
+    <string name="select_frequency">Fréquence d\'envoi</string>
+    <string name="stop_tracking">Stopper le tracking</string>
+    <string name="log_messages_will_appear_here">Les messages apparaissent ici</string>
+    <string name="tracker_has_started">Le tracking est démarré</string>
+    <string name="tracker_has_stopped">Le tracking est arrêté</string>
+    <string name="scan_qr_code">QR Scan</string>
+    <string name="scan_cancelled">QR Scan annulé</string>
+    <string name="scan_failed">QR Scan échoué</string>
+    <string name="save">Sauvegarder</string>
+    <string name="ffvl_key_missing">Clé FFVL manquante</string>
+    <string name="key_saved">Clé sauvegardée</string>
+    <string name="frequencyChanged">Fréquence mise à jour:</string>
+    <string name="seconds">secondes</string>
+</resources>

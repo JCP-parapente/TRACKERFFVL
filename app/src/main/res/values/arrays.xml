@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="frequency_options">
+        <item>10 seconds</item>
+        <item>60 seconds</item>
+        <item>90 seconds</item>
+        <item>120 seconds</item>
+        <item>180 seconds</item>
+        <item>300 seconds</item>
+        <item>600 seconds</item>
+        <item>900 seconds</item>
+        <!-- Add more frequency options as needed -->
+    </string-array>
+</resources>
