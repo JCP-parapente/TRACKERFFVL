@@ -1,4 +1,4 @@
-Petite application toute simple pour anvoyer sa position GPS (et quelques autres infos) à la FFVL grace à l'API mise à disposition:
+Petite application toute simple pour envoyer sa position GPS (et quelques autres infos) à la FFVL grace à l'API mise à disposition:
 
 https://data.ffvl.fr/api/?help=tracker
 
