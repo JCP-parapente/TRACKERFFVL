@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import org.json.JSONObject
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
@@ -120,18 +121,6 @@ class TrackingService : Service() {
 
         data.categoryName = TrackingUtils.getCategoryName(context)
 
-        println("batteryLevel = ${data.batteryLevel.toString()}")
-        //println("batteryVoltage = ${data.batteryVoltage.toString()}")
-        println("latitude = ${data.latitude.toString()}")
-        println("longitude = ${data.longitude.toString()}")
-
-        Logger.log("batteryLevel = ${data.batteryLevel.toString()}")
-        //Logger.log("batteryVoltage = ${data.batteryVoltage.toString()}")
-        Logger.log("latitude = ${data.latitude.toString()}")
-        Logger.log("longitude = ${data.longitude.toString()}")
-        Logger.log("altitude = ${data.altitude.toString()}")
-        Logger.log("category = ${data.categoryName}")
-
         val url: String = "https://data.ffvl.fr/api/?" +
                 "key=" + data.apiKey +
                 "&ffvl_tracker_key=" + data.trackerKey +
@@ -142,14 +131,11 @@ class TrackingService : Service() {
                 "&ts=" + data.ts.toString() +
                 "&battery=" + data.batteryLevel.toString() +
                 "&v_bat=" + data.batteryVoltage.toString() +
-                "&category_name=" + Uri.encode(data.categoryName) +
-                "&accuracy=0"
+                "&category_name=" + Uri.encode(data.categoryName)
 
-        println(url)
-        Logger.log("simulate: $url")
+        Log.d(TAG,url)
         if (data.latitude != 0.0) {
-            val response = doGetHttpRequest(context, url)
-            Log.d(TAG, response.toString())
+            doGetHttpRequest(context, url)
         }
 
 
@@ -173,13 +159,22 @@ class TrackingService : Service() {
     }
 
     private fun onResponse(response: String?) {
-        println("response: ")
-        println(response.toString().substring(0, kotlin.math.min(response.toString().length, 500)))
+        Log.d(TAG, "response length: " + response.toString().length.toString())
+        Log.d(TAG, response.toString())
+
+        val jsonResponse = response?.let { JSONObject(it) }
+        if (jsonResponse != null) {
+            if (jsonResponse.getString("status") == "OK") {
+                Logger.log(getString(R.string.position_uploaded))
+
+            }
+        }
     }
 
     private fun onError(response: String?) {
         println("doGetHttpRequest onERROR")
         println(response.toString())
+        Logger.log(getString(R.string.errorFFVLAPI))
     }
 
     companion object {

@@ -19,4 +19,7 @@
     <string name="category_name">Catégorie</string>
     <string name="categoryNameChanged">Catégorie changée:</string>
     <string name="select_category">Choisir la catérogie</string>
+    <string name="position_uploaded">position mise à jour</string>
+    <string name="errorFFVLAPI">Erreur FFVL API</string>
+    <string name="tryAgainInAMoment">Essayer à nouveau dans un moment</string>
 </resources>

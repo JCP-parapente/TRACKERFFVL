@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="frequency_options">
-        <item>10 seconds</item>
-        <item>60 seconds</item>
-        <item>90 seconds</item>
-        <item>120 seconds</item>
-        <item>180 seconds</item>
-        <item>300 seconds</item>
-        <item>600 seconds</item>
-        <item>900 seconds</item>
+        <item>60 sec</item>
+        <item>90 sec</item>
+        <item>120 sec</item>
+        <item>180 sec</item>
+        <item>300 sec</item>
+        <item>600 sec</item>
+        <item>900 sec</item>
         <!-- Add more frequency options as needed -->
     </string-array>
     <string-array name="category_name_options">

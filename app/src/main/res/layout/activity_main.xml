@@ -39,8 +39,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_weight="1"
-            android:text="@string/scan_qr_code"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:text="@string/scan_qr_code" />
 
         <Button
             android:id="@+id/saveButton"
@@ -50,8 +49,7 @@
             android:layout_marginEnd="16dp"
             android:layout_weight="1"
             android:enabled="false"
-            android:text="@string/save"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:text="@string/save" />
     </LinearLayout>
 
     <LinearLayout

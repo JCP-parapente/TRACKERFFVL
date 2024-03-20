@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
                 // Task failed with an exception
                 Logger.log(getString(R.string.scan_failed))
                 Logger.log(e.toString())
+                Logger.log(getString(R.string.tryAgainInAMoment))
             }
 
         }
@@ -101,14 +102,23 @@ class MainActivity : AppCompatActivity() {
             toggleTracking()
         }
 
+        if (!TrackingUtils.isTracking) {
+
+            binding.trackingButton.text = getString(R.string.stop_tracking)
+        } else {
+            binding.trackingButton.text = getString(R.string.start_tracking)
+
+        }
+
         // Get the array of frequencies from resources
         val frequenciesArray = resources.getStringArray(R.array.frequency_options)
         var selectedFrequency = 0
         val sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        val savedFrequency = sharedPreferences.getInt(PREF_FREQUENCY, 60)
+        val savedFrequency = sharedPreferences.getInt(PREF_FREQUENCY, DEFAULT_FREQUENCY_SECONDS)
+
         //val position = frequenciesArray.indexOf("$savedFrequency seconds")
-        val position = frequenciesArray.indexOf("$savedFrequency seconds")
+        val position = frequenciesArray.indexOf("$savedFrequency sec")
         var previousSelectedItemPosition = position
 
         if (position != -1) {

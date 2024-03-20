@@ -18,4 +18,7 @@
     <string name="category_name">Category name</string>
     <string name="categoryNameChanged">"Category changed to:"</string>
     <string name="select_category">Select category</string>
+    <string name="position_uploaded">position uploaded</string>
+    <string name="errorFFVLAPI">Error FFVL API</string>
+    <string name="tryAgainInAMoment">Try again in a moment</string>
 </resources>
