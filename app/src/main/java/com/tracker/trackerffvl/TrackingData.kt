@@ -1,11 +1,11 @@
 package com.tracker.trackerffvl
 // refer to https://data.ffvl.fr/api/?help=tracker
 
-private const val API_KEY = "zozozlafritte"
 private const val MODE = "push" // push or read
 private const val DEVICE_TYPE = "Tracker FFVL - Android Application"
 
 object TrackingData {
+    const val API_KEY = BuildConfig.FFVL_API_KEY
     const val apiKey: String = API_KEY
     var trackerKey: String? = ""
     var mode: String = MODE // push or read

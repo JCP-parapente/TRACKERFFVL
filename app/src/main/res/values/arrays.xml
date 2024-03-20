@@ -11,4 +11,15 @@
         <item>900 seconds</item>
         <!-- Add more frequency options as needed -->
     </string-array>
+    <string-array name="category_name_options">
+        <item>paragliding</item>
+        <item>delta</item>
+        <item>walking</item>
+        <item>hike and flight</item>
+        <item>kite</item>
+        <item>paramotor</item>
+        <item>base jump</item>
+        <item>hike only</item>
+        <!-- Add more frequency options as needed -->
+    </string-array>
 </resources>

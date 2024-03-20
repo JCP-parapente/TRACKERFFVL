@@ -16,4 +16,7 @@
     <string name="key_saved">Clé sauvegardée</string>
     <string name="frequencyChanged">Fréquence mise à jour:</string>
     <string name="seconds">secondes</string>
+    <string name="category_name">Catégorie</string>
+    <string name="categoryNameChanged">Catégorie changée:</string>
+    <string name="select_category">Choisir la catérogie</string>
 </resources>

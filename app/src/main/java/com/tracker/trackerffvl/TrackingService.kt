@@ -7,6 +7,7 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
@@ -117,6 +118,8 @@ class TrackingService : Service() {
         data.batteryLevel = battDetails.first
         data.batteryVoltage = battDetails.second
 
+        data.categoryName = TrackingUtils.getCategoryName(context)
+
         println("batteryLevel = ${data.batteryLevel.toString()}")
         //println("batteryVoltage = ${data.batteryVoltage.toString()}")
         println("latitude = ${data.latitude.toString()}")
@@ -127,6 +130,7 @@ class TrackingService : Service() {
         Logger.log("latitude = ${data.latitude.toString()}")
         Logger.log("longitude = ${data.longitude.toString()}")
         Logger.log("altitude = ${data.altitude.toString()}")
+        Logger.log("category = ${data.categoryName}")
 
         val url: String = "https://data.ffvl.fr/api/?" +
                 "key=" + data.apiKey +
@@ -136,11 +140,19 @@ class TrackingService : Service() {
                 "&longitude=" + data.longitude.toString() +
                 "&altitude=" + data.altitude.toString() +
                 "&ts=" + data.ts.toString() +
-                "&battery" + data.batteryLevel.toString() +
-                "&v_bat" + data.batteryVoltage.toString()
+                "&battery=" + data.batteryLevel.toString() +
+                "&v_bat=" + data.batteryVoltage.toString() +
+                "&category_name=" + Uri.encode(data.categoryName) +
+                "&accuracy=0"
 
         println(url)
         Logger.log("simulate: $url")
+        if (data.latitude != 0.0) {
+            val response = doGetHttpRequest(context, url)
+            Log.d(TAG, response.toString())
+        }
+
+
         //val response = doGetHttpRequest(context, url)
     }
 
@@ -162,7 +174,7 @@ class TrackingService : Service() {
 
     private fun onResponse(response: String?) {
         println("response: ")
-        println(response.toString().substring(0, kotlin.math.min(response.toString().length, 50)))
+        println(response.toString().substring(0, kotlin.math.min(response.toString().length, 500)))
     }
 
     private fun onError(response: String?) {

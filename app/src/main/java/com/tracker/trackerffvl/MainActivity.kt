@@ -19,7 +19,8 @@ import com.tracker.trackerffvl.databinding.ActivityMainBinding
 const val DEFAULT_FREQUENCY_SECONDS: Int = 60
 const val PREFS_NAME = "MyPrefs" // name of the preference where to save
 const val PREF_FREQUENCY = "UpdateFrequency" // update frequency
-const val PREF_TRACKERKEY = "TrackerKey" // update frequency
+const val PREF_CATEGORY_NAME = "CategoryName" // paragliding, delta, ...
+const val PREF_TRACKERKEY = "TrackerKey"
 const val TRACKER_KEY_LENGTH = 32
 
 class MainActivity : AppCompatActivity() {
@@ -105,12 +106,15 @@ class MainActivity : AppCompatActivity() {
         var selectedFrequency = 0
         val sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        val savedFrequency = sharedPreferences.getInt(PREF_FREQUENCY, 0)
+        val savedFrequency = sharedPreferences.getInt(PREF_FREQUENCY, 60)
+        //val position = frequenciesArray.indexOf("$savedFrequency seconds")
         val position = frequenciesArray.indexOf("$savedFrequency seconds")
         var previousSelectedItemPosition = position
+
         if (position != -1) {
             binding.frequencySpinner.setSelection(position)
         }
+
         // Set a listener for frequency selection changes
         binding.frequencySpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -130,7 +134,11 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     if (position != previousSelectedItemPosition) {
-                        Logger.log(getString(R.string.frequencyChanged)+" $selectedFrequency "+getString(R.string.seconds))
+                        Logger.log(
+                            getString(R.string.frequencyChanged) + " $selectedFrequency " + getString(
+                                R.string.seconds
+                            )
+                        )
                     }
                     previousSelectedItemPosition = position
                 }
@@ -139,6 +147,38 @@ class MainActivity : AppCompatActivity() {
                     // Do nothing
                 }
             }
+
+        val categoryNameArray = resources.getStringArray(R.array.category_name_options)
+        var savedCategoryName = sharedPreferences.getString(PREF_CATEGORY_NAME, "paragliding")
+        val categoryNamePosition = categoryNameArray.indexOf("$savedCategoryName")
+        var previousSelectedCategoryNamePosition = categoryNamePosition
+        if (categoryNamePosition != -1) {
+            binding.categoryNameSpinner.setSelection(categoryNamePosition)
+        }
+        binding.categoryNameSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?, view: View?, position: Int, id: Long
+                ) {
+                    // Ensure the selected position is within the range of the categoryName array
+                    if (position >= 0 && position < categoryNameArray.size) {
+                        savedCategoryName = categoryNameArray[position]
+                        // save the selected category name
+                        editor.putString(PREF_CATEGORY_NAME, savedCategoryName)
+                        editor.apply()
+                    }
+
+                    if (position != previousSelectedCategoryNamePosition) {
+                        Logger.log(getString(R.string.categoryNameChanged) + " $savedCategoryName")
+                    }
+                    previousSelectedCategoryNamePosition = position
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // Do nothing
+                }
+            }
+
 
         //location permission
         if (ActivityCompat.checkSelfPermission(
